@@ -1,0 +1,65 @@
+databaseChangeLog:
+- changeSet:
+    id: ddl-order-1.0.0
+    author: test
+    changes:
+
+    - createTable:
+        tableName: rs_order
+        columns:
+        - column:
+            name: id
+            type: BIGINT
+            constraints:
+              primaryKeyName: rs_order_pk
+              primaryKey: true
+              nullable: false
+            autoIncrement: true
+        - column:
+            name: created_at
+            type: DATETIME
+
+    - createTable:
+        tableName: rs_order_item
+        columns:
+        - column:
+            name: id
+            type: BIGINT
+            constraints:
+              primaryKeyName: rs_order_item_pk
+              primaryKey: true
+              nullable: false
+            autoIncrement: true
+        - column:
+            name: order_id
+            type: BIGINT
+        - column:
+            name: item_id
+            type: BIGINT
+        - column:
+            name: quantity
+            type: BIGINT
+        - column:
+            name: price
+            type: number
+
+    - createTable:
+        tableName: rs_item
+        columns:
+        - column:
+            name: id
+            type: BIGINT
+            constraints:
+              primaryKeyName: item_pk
+              primaryKey: true
+              nullable: false
+            autoIncrement: true
+        - column:
+            name: name
+            type: VARCHAR(100)
+        - column:
+            name: price
+            type: number
+        - column:
+            name: created_at
+            type: DATETIME

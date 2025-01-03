@@ -1,0 +1,7 @@
+databaseChangeLog:
+- include:
+    file: db.changelog-audit-revision-ddl.yaml
+    relativeToChangelogFile: true
+- include:
+    file: db.changelog-order-ddl.yaml
+    relativeToChangelogFile: true

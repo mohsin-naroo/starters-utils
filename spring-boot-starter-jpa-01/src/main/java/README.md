@@ -1,0 +1,1 @@
+# Spring JPA generate technical Ids with Twitter Snowflake time based sequence

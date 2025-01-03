@@ -1,0 +1,1 @@
+# A minimal/simple Spring JPA native audit framework with @EntityListeners

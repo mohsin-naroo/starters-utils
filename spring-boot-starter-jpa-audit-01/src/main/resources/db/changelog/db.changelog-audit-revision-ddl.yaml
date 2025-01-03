@@ -1,0 +1,38 @@
+databaseChangeLog:
+- changeSet:
+    id: ddl-audit-revision-1.0.0
+    author: test
+    changes:
+
+    - createTable:
+        tableName: audit_revision
+        columns:
+        - column:
+            name: id
+            type: BIGINT
+            constraints:
+              primaryKeyName: audit_revision_pk
+              primaryKey: true
+              nullable: false
+            autoIncrement: true
+        - column:
+            name: action_type
+            type: CHAR(1)
+        - column:
+            name: action_by
+            type: VARCHAR(50)
+        - column:
+            name: action_at
+            type: DATETIME
+        - column:
+            name: entity_state
+            type: TEXT
+        - column:
+            name: entity_type
+            type: VARCHAR(100)
+        - column:
+            name: entity_id
+            type: BIGINT
+        - column:
+            name: entity_id_text
+            type: VARCHAR(20)
