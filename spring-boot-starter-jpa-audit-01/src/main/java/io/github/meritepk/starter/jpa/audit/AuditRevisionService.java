@@ -116,7 +116,7 @@ public class AuditRevisionService {
                             || Attribute.PersistentAttributeType.ONE_TO_ONE
                                     .equals(attribute.getPersistentAttributeType())) {
                         AttributeMeta meta = initAttributeMeta(attribute, methods, attributes);
-                        meta.reference = findAttributeMetas(attribute.getJavaType())[0];
+                        meta.setReference(findAttributeMetas(attribute.getJavaType())[0]);
                     }
                 }
             });
@@ -139,8 +139,9 @@ public class AuditRevisionService {
         Map<String, Method> methods = new HashMap<>();
         try {
             for (PropertyDescriptor descriptor : Introspector.getBeanInfo(clas).getPropertyDescriptors()) {
-                if (descriptor.getReadMethod() != null) {
-                    methods.put(descriptor.getName(), descriptor.getReadMethod());
+                Method method = descriptor.getReadMethod();
+                if (method != null) {
+                    methods.put(descriptor.getName(), method);
                 }
             }
         } catch (Exception e) {
@@ -162,7 +163,7 @@ public class AuditRevisionService {
         AttributeMeta[] attributes = findAttributeMetas(target.getClass());
         Map<String, Object> values = new HashMap<>();
         for (AttributeMeta attribute : attributes) {
-            Object value = invokeMethod(target, attribute.method);
+            Object value = invokeMethod(target, attribute.getMethod());
             if (value != null) {
                 if (attribute.getReference() != null) {
                     values.put(attribute.getName(), Map.of(attribute.getReference().getName(),
@@ -172,7 +173,7 @@ public class AuditRevisionService {
                 }
             }
         }
-        String entityIdText = values.get(attributes[0].name).toString();
+        String entityIdText = values.get(attributes[0].getName()).toString();
         Long entityId;
         try {
             entityId = Long.parseLong(entityIdText);
